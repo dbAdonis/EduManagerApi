@@ -20,8 +20,8 @@ public class CalificacionDAOImpl implements CalificacionDAO {
 
     @Override
     public void save(Calificacion calificacion) {
-        String sql = "INSERT INTO calificacion (id_calificacion, id_matricula, tipo_evaluacion, nota, fecha) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, calificacion.getId_calificacion(), calificacion.getMatricula().getId_matricula(),
+        String sql = "INSERT INTO calificacion (id_matricula, tipo_evaluacion, nota, fecha) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, calificacion.getMatricula().getId_matricula(),
                 calificacion.getTipo_evaluacion(), calificacion.getNota(), calificacion.getFecha());
     }
 
@@ -54,7 +54,6 @@ public class CalificacionDAOImpl implements CalificacionDAO {
         @Override
         public Calificacion mapRow(ResultSet rs, int rowNum) throws SQLException {
             Calificacion c = new Calificacion();
-            c.setId_calificacion(rs.getInt("id_calificacion"));
 
             Matricula m = new Matricula();
             m.setId_matricula(rs.getInt("id_matricula"));

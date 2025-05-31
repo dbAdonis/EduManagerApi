@@ -21,8 +21,8 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public void save(Matricula matricula) {
-        String sql = "INSERT INTO matricula (id_matricula, id_estudiante, id_curso, fecha, estado) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, matricula.getId_matricula(), matricula.getEstudiante().getId_estudiante(),
+        String sql = "INSERT INTO matricula (id_estudiante, id_curso, fecha, estado) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, matricula.getEstudiante().getId_estudiante(),
                 matricula.getCurso().getId_curso(),
                 matricula.getFecha(), matricula.getEstado());
     }
@@ -57,7 +57,6 @@ public class MatriculaDAOImpl implements MatriculaDAO {
         @Override
         public Matricula mapRow(ResultSet rs, int rowNum) throws SQLException {
             Matricula m = new Matricula();
-            m.setId_matricula(rs.getInt("id_matricula"));
 
             Estudiante e = new Estudiante();
             e.setId_estudiante(rs.getInt("id_estudiante"));

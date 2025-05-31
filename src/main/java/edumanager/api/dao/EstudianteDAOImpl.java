@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import edumanager.api.model.Estudiante;
+
 @Repository
 public class EstudianteDAOImpl implements EstudianteDAO {
     private final JdbcTemplate jdbcTemplate;
@@ -18,8 +19,9 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
     @Override
     public void save(Estudiante estudiante) {
-        String sql = "INSERT INTO estudiante (id_estudiante, nombre, correo, fecha_nacimiento) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, estudiante.getId_estudiante(), estudiante.getNombre(), estudiante.getCorreo(), estudiante.getPromedio());
+        String sql = "INSERT INTO estudiante (nombre, correo, carnet, promedio) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, estudiante.getNombre(), estudiante.getCorreo(), estudiante.getCarnet(),
+                estudiante.getPromedio());
     }
 
     @Override
@@ -36,8 +38,9 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
     @Override
     public void update(Estudiante estudiante) {
-        String sql = "UPDATE estudiante SET nombre = ?, correo = ?, carnet = ?, proemdio = ? WHERE id_estudiante = ?";
-        jdbcTemplate.update(sql, estudiante.getNombre(), estudiante.getCorreo(), estudiante.getCarnet(), estudiante.getPromedio(), estudiante.getId_estudiante());
+        String sql = "UPDATE estudiante SET nombre = ?, correo = ?, carnet = ?, promedio = ? WHERE id_estudiante = ?";
+        jdbcTemplate.update(sql, estudiante.getNombre(), estudiante.getCorreo(), estudiante.getCarnet(),
+                estudiante.getPromedio(), estudiante.getId_estudiante());
     }
 
     @Override
@@ -50,7 +53,6 @@ public class EstudianteDAOImpl implements EstudianteDAO {
         @Override
         public Estudiante mapRow(ResultSet rs, int rowNum) throws SQLException {
             Estudiante e = new Estudiante();
-            e.setId_estudiante(rs.getInt("id_estudiante"));
             e.setNombre(rs.getString("nombre"));
             e.setCorreo(rs.getString("correo"));
             e.setCarnet(rs.getString("carnet"));

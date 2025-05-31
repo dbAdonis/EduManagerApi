@@ -18,36 +18,37 @@ public class ProfesorDAOImpl implements ProfesorDAO {
 
     @Override
     public void save(Profesor profesor) {
-        String sql = "INSERT INTO profesores (id, nombre, especialidad, correo) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, profesor.getId_profesor(), profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo());
+        String sql = "INSERT INTO Profesor (nombre, especialidad, correo) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo());
     }
 
     @Override
     public Profesor findById(String id) {
-        String sql = "SELECT * FROM profesores WHERE id = ?";
+        String sql = "SELECT * FROM Profesor WHERE id_profesor = ?";
         return jdbcTemplate.queryForObject(sql, new ProfesorRowMapper(), id);
     }
+
     @Override
     public List<Profesor> findAll() {
-        String sql = "SELECT * FROM profesores";
+        String sql = "SELECT * FROM Profesor";
         return jdbcTemplate.query(sql, new ProfesorRowMapper());
     }
 
     @Override
     public void update(Profesor profesor) {
-        String sql = "UPDATE profesores SET nombre = ?, especialidad = ?, correo = ? WHERE id = ?";
-        jdbcTemplate.update(sql, profesor.getId_profesor(), profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo());
+        String sql = "UPDATE Profesor SET nombre = ?, especialidad = ?, correo = ? WHERE id_profesor = ?";
+        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo(), profesor.getId_profesor());
     }
 
     @Override
     public void delete(String id) {
-        String sql = "DELETE FROM profesores WHERE id = ?";
+        String sql = "DELETE FROM Profesor WHERE id_profesor = ?";
         jdbcTemplate.update(sql, id);
     }
 
     private static class ProfesorRowMapper implements RowMapper<Profesor> {
         @Override
-        public Profesor mapRow(@SuppressWarnings("null") ResultSet rs, int rowNum) throws SQLException {
+        public Profesor mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Profesor(
                 rs.getString("nombre"),
                 rs.getString("especialidad"),
