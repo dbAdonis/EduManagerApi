@@ -18,8 +18,8 @@ public class ProfesorDAOImpl implements ProfesorDAO {
 
     @Override
     public void save(Profesor profesor) {
-        String sql = "INSERT INTO Profesor (nombre, especialidad, correo) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo());
+        String sql = "INSERT INTO Profesor (nombre, correo_institucional) VALUES (?, ?)";
+        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getCorreo_institucional());
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ProfesorDAOImpl implements ProfesorDAO {
 
     @Override
     public void update(Profesor profesor) {
-        String sql = "UPDATE Profesor SET nombre = ?, especialidad = ?, correo = ? WHERE id_profesor = ?";
-        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getEspecialidad(), profesor.getCorreo(), profesor.getId_profesor());
+        String sql = "UPDATE Profesor SET nombre = ?, correo_institucional = ? WHERE id_profesor = ?";
+        jdbcTemplate.update(sql, profesor.getNombre(),  profesor.getCorreo_institucional(), profesor.getId_profesor());
     }
 
     @Override
@@ -51,8 +51,7 @@ public class ProfesorDAOImpl implements ProfesorDAO {
         public Profesor mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Profesor(
                 rs.getString("nombre"),
-                rs.getString("especialidad"),
-                rs.getString("correo")
+                rs.getString("correo_institucional")
             );
         }
     }

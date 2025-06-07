@@ -21,10 +21,10 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public void save(Matricula matricula) {
-        String sql = "INSERT INTO matricula (id_estudiante, id_curso, fecha, estado) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO matricula (id_estudiante, id_curso, fecha_matricula, estado, promedio) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, matricula.getEstudiante().getId_estudiante(),
                 matricula.getCurso().getId_curso(),
-                matricula.getFecha(), matricula.getEstado());
+                matricula.getFecha_matricula(), matricula.getEstado(), matricula.getPromedio());
     }
 
     @Override
@@ -41,10 +41,10 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public void update(Matricula matricula) {
-        String sql = "UPDATE matricula SET id_estudiante = ?, id_curso = ?, fecha = ?, estado = ? WHERE id_matricula = ?";
+        String sql = "UPDATE matricula SET id_estudiante = ?, id_curso = ?, fecha_matricula = ?, estado = ?, promedio = ? WHERE id_matricula = ?";
         jdbcTemplate.update(sql, matricula.getEstudiante().getId_estudiante(), matricula.getCurso().getId_curso(),
-                matricula.getFecha(),
-                matricula.getEstado(), matricula.getId_matricula());
+                matricula.getFecha_matricula(),
+                matricula.getEstado(), matricula.getPromedio());
     }
 
     @Override
@@ -66,10 +66,12 @@ public class MatriculaDAOImpl implements MatriculaDAO {
             c.setId_curso(rs.getInt("id_curso"));
             m.setCurso(c);
 
-            m.setFecha(rs.getDate("fecha").toLocalDate());
+            m.setFecha_matricula(rs.getDate("fecha").toLocalDate());
 
-            String estadoDb = rs.getString("estado");
-            m.setEstado(Matricula.Estado.valueOf(estadoDb.toLowerCase()));
+            m.setEstado(rs.getString("estado"));
+
+            m.setPromedio(rs.getDouble("promedio"));
+
             return m;
         }
     }

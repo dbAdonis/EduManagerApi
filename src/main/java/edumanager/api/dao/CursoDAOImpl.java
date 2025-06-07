@@ -20,8 +20,8 @@ public class CursoDAOImpl implements CursoDAO {
 
     @Override
     public void save(Curso curso) {
-        String sql = "INSERT INTO curso (nombre, descripcion, id_profesor) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, curso.getId_curso(), curso.getNombre(), curso.getDescripcion(),
+        String sql = "INSERT INTO curso (nombre, codigo, id_profesor) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, curso.getId_curso(), curso.getNombre(), curso.getCodigo(),
                 curso.getProfesor().getId_profesor());
     }
 
@@ -40,7 +40,7 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public void update(Curso curso) {
         String sql = "UPDATE curso SET nombre = ?, descripcion = ?, id_profesor = ? WHERE id_curso = ?";
-        jdbcTemplate.update(sql, curso.getNombre(), curso.getDescripcion(), curso.getProfesor().getId_profesor(),
+        jdbcTemplate.update(sql, curso.getNombre(), curso.getCodigo(), curso.getProfesor().getId_profesor(),
                 curso.getId_curso());
     }
 
@@ -55,7 +55,7 @@ public class CursoDAOImpl implements CursoDAO {
         public Curso mapRow(ResultSet rs, int rowNum) throws SQLException {
             Curso c = new Curso();
             c.setNombre(rs.getString("nombre"));
-            c.setDescripcion(rs.getString("descripcion"));
+            c.setCodigo(rs.getString("codigo"));
 
             Profesor p = new Profesor();
             p.setId_profesor(rs.getInt("id_profesor"));

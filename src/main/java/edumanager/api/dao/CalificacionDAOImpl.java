@@ -20,9 +20,13 @@ public class CalificacionDAOImpl implements CalificacionDAO {
 
     @Override
     public void save(Calificacion calificacion) {
-        String sql = "INSERT INTO calificacion (id_matricula, tipo_evaluacion, nota, fecha) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, calificacion.getMatricula().getId_matricula(),
-                calificacion.getTipo_evaluacion(), calificacion.getNota(), calificacion.getFecha());
+        String sql = "INSERT INTO calificacion (id_matricula, tipo_evaluacion, nota, fecha_registro) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                calificacion.getMatricula().getId_matricula(),
+                calificacion.getTipo_evaluacion(),
+                calificacion.getNota(),
+                new java.sql.Date(calificacion.getFecha_registro().getTime())
+        );
     }
 
     @Override
@@ -39,9 +43,14 @@ public class CalificacionDAOImpl implements CalificacionDAO {
 
     @Override
     public void update(Calificacion calificacion) {
-        String sql = "UPDATE calificacion SET id_matricula = ?, tipo_evaluacion = ?, nota = ?, fecha = ? WHERE id_calificacion = ?";
-        jdbcTemplate.update(sql, calificacion.getMatricula().getId_matricula(), calificacion.getTipo_evaluacion(),
-                calificacion.getNota(), calificacion.getFecha(), calificacion.getId_calificacion());
+        String sql = "UPDATE calificacion SET id_matricula = ?, tipo_evaluacion = ?, nota = ?, fecha_registro = ? WHERE id_calificacion = ?";
+        jdbcTemplate.update(sql,
+                calificacion.getMatricula().getId_matricula(),
+                calificacion.getTipo_evaluacion(),
+                calificacion.getNota(),
+                new java.sql.Date(calificacion.getFecha_registro().getTime()),
+                calificacion.getId_calificacion()
+        );
     }
 
     @Override
@@ -55,18 +64,17 @@ public class CalificacionDAOImpl implements CalificacionDAO {
         public Calificacion mapRow(ResultSet rs, int rowNum) throws SQLException {
             Calificacion c = new Calificacion();
 
+            c.setId_calificacion(rs.getInt("id_calificacion"));
+
             Matricula m = new Matricula();
             m.setId_matricula(rs.getInt("id_matricula"));
             c.setMatricula(m);
 
-            String tipo = rs.getString("tipo_evaluacion");
-            c.setTipo_evaluacion(Calificacion.TipoEvaluacion.valueOf(tipo));
-
+            c.setTipo_evaluacion(rs.getString("tipo_evaluacion"));
             c.setNota(rs.getDouble("nota"));
-            c.setFecha(rs.getDate("fecha").toLocalDate());
+            c.setFecha_registro(rs.getDate("fecha_registro"));
 
             return c;
         }
     }
-
 }

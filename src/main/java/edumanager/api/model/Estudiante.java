@@ -22,17 +22,14 @@ public class Estudiante {
     @Column(unique = true)
     private String carnet;
 
-    private int promedio;
-
     public Estudiante() {
     }
 
-    public Estudiante(String nombre, String correo, String carnet, int promedio) {
+    public Estudiante(String nombre, String correo, String carnet) {
         this.id_estudiante = 0;
         this.nombre = nombre;
         this.correo = correo;
         this.carnet = carnet;
-        this.promedio = promedio;
     }
 
     public int getId_estudiante() {
@@ -67,14 +64,4 @@ public class Estudiante {
         this.carnet = carnet;
     }
 
-    public int getPromedio() {
-        return promedio;
-    }
-
-    public void setPromedio(int promedio) {
-        this.promedio = promedio;
-    }
-
-    
-
- }
+}

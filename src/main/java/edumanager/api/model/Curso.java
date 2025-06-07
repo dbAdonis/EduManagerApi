@@ -11,19 +11,18 @@ public class Curso {
 
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
-    private String descripcion;
+    @Column(unique = true)
+    private String codigo;
 
     @ManyToOne
-    @JoinColumn(name = "id_profesor")
+    @JoinColumn(name = "id_profesor", nullable = false)
     private Profesor profesor;
 
-    public Curso() {
-    }
+    public Curso() {}
 
-    public Curso(String nombre, String descripcion, Profesor profesor) {
+    public Curso(String nombre, String codigo, Profesor profesor) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.codigo = codigo;
         this.profesor = profesor;
     }
 
@@ -43,12 +42,12 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Profesor getProfesor() {

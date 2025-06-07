@@ -1,7 +1,7 @@
 package edumanager.api.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "calificacion")
@@ -11,27 +11,23 @@ public class Calificacion {
     private int id_calificacion;
 
     @ManyToOne
-    @JoinColumn(name = "id_matricula")
+    @JoinColumn(name = "id_matricula", nullable = false)
     private Matricula matricula;
 
-    @Enumerated(EnumType.STRING)
-    private TipoEvaluacion tipo_evaluacion;
-
-    public enum TipoEvaluacion {
-        Parcial, Final, Proyecto
-    }
+    private String tipo_evaluacion;
 
     private double nota;
-    private LocalDate fecha;
 
-    public Calificacion() {
-    }
+    @Temporal(TemporalType.DATE)
+    private Date fecha_registro;
 
-    public Calificacion(Matricula matricula, TipoEvaluacion tipo_evaluacion, double nota, LocalDate fecha) {
+    public Calificacion() {}
+
+    public Calificacion(Matricula matricula, String tipo_evaluacion, double nota, Date fecha_registro) {
         this.matricula = matricula;
         this.tipo_evaluacion = tipo_evaluacion;
         this.nota = nota;
-        this.fecha = fecha;
+        this.fecha_registro = fecha_registro;
     }
 
     public int getId_calificacion() {
@@ -50,11 +46,11 @@ public class Calificacion {
         this.matricula = matricula;
     }
 
-    public TipoEvaluacion getTipo_evaluacion() {
+    public String getTipo_evaluacion() {
         return tipo_evaluacion;
     }
 
-    public void setTipo_evaluacion(TipoEvaluacion tipo_evaluacion) {
+    public void setTipo_evaluacion(String tipo_evaluacion) {
         this.tipo_evaluacion = tipo_evaluacion;
     }
 
@@ -66,11 +62,11 @@ public class Calificacion {
         this.nota = nota;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public Date getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 }

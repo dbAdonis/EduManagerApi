@@ -1,11 +1,6 @@
 package edumanager.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "profesor")
@@ -15,19 +10,15 @@ public class Profesor {
     private int id_profesor;
 
     private String nombre;
-    private String especialidad;
 
     @Column(unique = true)
-    private String correo;
+    private String correo_institucional;
 
-    public Profesor() {
-    }
+    public Profesor() {}
 
-    public Profesor(String nombre, String especialidad, String correo) {
-        this.id_profesor = 0;
+    public Profesor(String nombre, String correo_institucional) {
         this.nombre = nombre;
-        this.especialidad = especialidad;
-        this.correo = correo;
+        this.correo_institucional = correo_institucional;
     }
 
     public int getId_profesor() {
@@ -46,22 +37,11 @@ public class Profesor {
         this.nombre = nombre;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public String getCorreo_institucional() {
+        return correo_institucional;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setCorreo_institucional(String correo_institucional) {
+        this.correo_institucional = correo_institucional;
     }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    
-
 }

@@ -1,40 +1,40 @@
 package edumanager.api.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "matricula")
+@Table(name = "matricula",
+       uniqueConstraints = {@UniqueConstraint(columnNames = {"id_estudiante", "id_curso"})})
 public class Matricula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_matricula;
 
     @ManyToOne
-    @JoinColumn(name = "id_estudiante")
+    @JoinColumn(name = "id_estudiante", nullable = false)
     private Estudiante estudiante;
 
     @ManyToOne
-    @JoinColumn(name = "id_curso")
+    @JoinColumn(name = "id_curso", nullable = false)
     private Curso curso;
 
-    private LocalDate fecha;
+    @Temporal(TemporalType.DATE)
+    private LocalDate fecha_matricula;
 
-    @Enumerated(EnumType.STRING)
-    private Estado estado;
+    private String estado; // "activo", "retirado", "riesgo"
 
-    public enum Estado {
-        activa, retirada, finalizada
-    }
+    private Double promedio; // nullable
 
-    public Matricula() {
-    }
+    public Matricula() {}
 
-    public Matricula(Estudiante estudiante, Curso curso, LocalDate fecha, Estado estado) {
+    public Matricula(Estudiante estudiante, Curso curso, LocalDate fecha_matricula, String estado, Double promedio) {
         this.estudiante = estudiante;
         this.curso = curso;
-        this.fecha = fecha;
+        this.fecha_matricula = fecha_matricula;
         this.estado = estado;
+        this.promedio = promedio;
     }
 
     public int getId_matricula() {
@@ -61,19 +61,27 @@ public class Matricula {
         this.curso = curso;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public LocalDate getFecha_matricula() {
+        return fecha_matricula;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setFecha_matricula(LocalDate fecha_matricula) {
+        this.fecha_matricula = fecha_matricula;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Double getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(Double promedio) {
+        this.promedio = promedio;
     }
 }
