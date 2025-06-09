@@ -52,6 +52,7 @@ public class EstudianteDAOImpl implements EstudianteDAO {
         @Override
         public Estudiante mapRow(ResultSet rs, int rowNum) throws SQLException {
             Estudiante e = new Estudiante();
+            e.setId_estudiante(rs.getInt("id_estudiante"));
             e.setNombre(rs.getString("nombre"));
             e.setCorreo(rs.getString("correo"));
             e.setCarnet(rs.getString("carnet"));

@@ -26,7 +26,6 @@ public class Estudiante {
     }
 
     public Estudiante(String nombre, String correo, String carnet) {
-        this.id_estudiante = 0;
         this.nombre = nombre;
         this.correo = correo;
         this.carnet = carnet;

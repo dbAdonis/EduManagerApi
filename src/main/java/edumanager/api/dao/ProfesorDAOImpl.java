@@ -49,10 +49,11 @@ public class ProfesorDAOImpl implements ProfesorDAO {
     private static class ProfesorRowMapper implements RowMapper<Profesor> {
         @Override
         public Profesor mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Profesor(
-                rs.getString("nombre"),
-                rs.getString("correo_institucional")
-            );
+            Profesor p = new Profesor();
+                p.setId_profesor(rs.getInt("id_profesor"));
+                p.setNombre(rs.getString("nombre"));
+                p.setCorreo_institucional(rs.getString("correo_institucional"));
+                return p;
         }
     }
 }

@@ -16,8 +16,15 @@ public class MatriculaService {
         this.matriculaDAO = matriculaDAO;
     }
 
-    public void add(Matricula matricula){
+    public Matricula add(Matricula matricula){
         matriculaDAO.save(matricula);
+        return matricula;
+    }
+
+    
+    public Matricula actualizar(Matricula matricula){
+        matriculaDAO.update(matricula);
+        return matricula;
     }
 
     public List<Matricula> listar(){
@@ -32,7 +39,4 @@ public class MatriculaService {
         matriculaDAO.delete(id);
     }
 
-    public void actualizar(Matricula matricula){
-        matriculaDAO.update(matricula);
-    }
 }

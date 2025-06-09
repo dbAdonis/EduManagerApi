@@ -15,8 +15,14 @@ public class ProfesorService {
         this.profesorDAO = profesorDAO;
     }
 
-    public void add(Profesor profesor) {
+    public Profesor add(Profesor profesor) {
         profesorDAO.save(profesor);
+        return profesor;
+    }
+
+    public Profesor actualizar(Profesor profesor) {
+        profesorDAO.update(profesor);
+        return profesor;
     }
 
     public List<Profesor> listar() {
@@ -31,7 +37,4 @@ public class ProfesorService {
         profesorDAO.delete(id);
     }
 
-    public void actualizar(Profesor profesor) {
-        profesorDAO.update(profesor);
-    }
 }

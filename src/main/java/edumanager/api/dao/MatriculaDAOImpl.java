@@ -28,16 +28,28 @@ public class MatriculaDAOImpl implements MatriculaDAO {
     }
 
     @Override
-    public Matricula findById(String id) {
-        String sql = "SELECT * FROM matricula WHERE id_matricula = ?";
-        return jdbcTemplate.queryForObject(sql, new MatriculaRowMapper(), id);
-    }
+public List<Matricula> findAll() {
+    String sql = "SELECT m.id_matricula, m.fecha_matricula, m.estado, m.promedio, " +
+                 "e.id_estudiante, e.nombre AS estudiante_nombre, " +
+                 "c.id_curso, c.nombre AS curso_nombre " +
+                 "FROM matricula m " +
+                 "JOIN estudiante e ON m.id_estudiante = e.id_estudiante " +
+                 "JOIN curso c ON m.id_curso = c.id_curso";
+    return jdbcTemplate.query(sql, new MatriculaRowMapper());
+}
 
-    @Override
-    public List<Matricula> findAll() {
-        String sql = "SELECT * FROM matricula";
-        return jdbcTemplate.query(sql, new MatriculaRowMapper());
-    }
+@Override
+public Matricula findById(String id) {
+    String sql = "SELECT m.id_matricula, m.fecha_matricula, m.estado, m.promedio, " +
+                 "e.id_estudiante, e.nombre AS estudiante_nombre, " +
+                 "c.id_curso, c.nombre AS curso_nombre " +
+                 "FROM matricula m " +
+                 "JOIN estudiante e ON m.id_estudiante = e.id_estudiante " +
+                 "JOIN curso c ON m.id_curso = c.id_curso " +
+                 "WHERE m.id_matricula = ?";
+    return jdbcTemplate.queryForObject(sql, new MatriculaRowMapper(), id);
+}
+
 
     @Override
     public void update(Matricula matricula) {
@@ -54,26 +66,27 @@ public class MatriculaDAOImpl implements MatriculaDAO {
     }
 
     private static class MatriculaRowMapper implements RowMapper<Matricula> {
-        @Override
-        public Matricula mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Matricula m = new Matricula();
+    @Override
+    public Matricula mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Matricula m = new Matricula();
+        m.setId_matricula(rs.getInt("id_matricula"));
+        m.setFecha_matricula(rs.getDate("fecha_matricula").toLocalDate());
+        m.setEstado(rs.getString("estado"));
+        m.setPromedio(rs.getDouble("promedio"));
 
-            Estudiante e = new Estudiante();
-            e.setId_estudiante(rs.getInt("id_estudiante"));
-            m.setEstudiante(e);
+        Estudiante e = new Estudiante();
+        e.setId_estudiante(rs.getInt("id_estudiante"));
+        e.setNombre(rs.getString("estudiante_nombre"));
+        m.setEstudiante(e);
 
-            Curso c = new Curso();
-            c.setId_curso(rs.getInt("id_curso"));
-            m.setCurso(c);
+        Curso c = new Curso();
+        c.setId_curso(rs.getInt("id_curso"));
+        c.setNombre(rs.getString("curso_nombre"));
+        m.setCurso(c);
 
-            m.setFecha_matricula(rs.getDate("fecha").toLocalDate());
-
-            m.setEstado(rs.getString("estado"));
-
-            m.setPromedio(rs.getDouble("promedio"));
-
-            return m;
-        }
+        return m;
     }
+}
+
 
 }
