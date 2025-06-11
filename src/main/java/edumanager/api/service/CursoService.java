@@ -29,11 +29,11 @@ public class CursoService {
         return cursoDAO.findAll();
     }
 
-    public Curso consultar(String id) {
+    public Curso consultar(int id) {
         return cursoDAO.findById(id);
     }
 
-    public void eliminar(String id) {
+    public void eliminar(int id) {
         cursoDAO.delete(id);
     }
 

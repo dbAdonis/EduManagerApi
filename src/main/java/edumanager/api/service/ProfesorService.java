@@ -29,11 +29,11 @@ public class ProfesorService {
         return profesorDAO.findAll();
     }
 
-    public Profesor consultar(String id) {
+    public Profesor consultar(int id) {
         return profesorDAO.findById(id);
     }
 
-    public void eliminar(String id) {
+    public void eliminar(int id) {
         profesorDAO.delete(id);
     }
 

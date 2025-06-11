@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface CalificacionDAO {
     void save(Calificacion calificacion);
-    Calificacion findById(String id);
+    Calificacion findById(int id);
     List<Calificacion> findAll();
     void update(Calificacion calificacion);
-    void delete(String id);
+    void delete(int id);
 }

@@ -1,40 +1,22 @@
 package edumanager.api.model;
 
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "matricula",
-       uniqueConstraints = {@UniqueConstraint(columnNames = {"id_estudiante", "id_curso"})})
 public class Matricula {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id_matricula;
-
-    @ManyToOne
-    @JoinColumn(name = "id_estudiante", nullable = false)
     private Estudiante estudiante;
-
-    @ManyToOne
-    @JoinColumn(name = "id_curso", nullable = false)
     private Curso curso;
-
-    @Temporal(TemporalType.DATE)
     private LocalDate fecha_matricula;
-
     private String estado; // "activo", "retirado", "riesgo"
-
-    private Double promedio; // nullable
 
     public Matricula() {}
 
-    public Matricula(Estudiante estudiante, Curso curso, LocalDate fecha_matricula, String estado, Double promedio) {
+    public Matricula(Estudiante estudiante, Curso curso, LocalDate fecha_matricula, String estado) {
         this.estudiante = estudiante;
         this.curso = curso;
         this.fecha_matricula = fecha_matricula;
         this.estado = estado;
-        this.promedio = promedio;
     }
 
     public int getId_matricula() {
@@ -77,11 +59,4 @@ public class Matricula {
         this.estado = estado;
     }
 
-    public Double getPromedio() {
-        return promedio;
-    }
-
-    public void setPromedio(Double promedio) {
-        this.promedio = promedio;
-    }
 }

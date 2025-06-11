@@ -1,10 +1,8 @@
 package edumanager.api.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.*;
 import org.springframework.stereotype.Repository;
 import edumanager.api.model.Profesor;
 
@@ -18,12 +16,12 @@ public class ProfesorDAOImpl implements ProfesorDAO {
 
     @Override
     public void save(Profesor profesor) {
-        String sql = "INSERT INTO Profesor (nombre, correo_institucional) VALUES (?, ?)";
-        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getCorreo_institucional());
+        String sql = "INSERT INTO Profesor (nombre, correo) VALUES (?, ?)";
+        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getCorreo());
     }
 
     @Override
-    public Profesor findById(String id) {
+    public Profesor findById(int id) {
         String sql = "SELECT * FROM Profesor WHERE id_profesor = ?";
         return jdbcTemplate.queryForObject(sql, new ProfesorRowMapper(), id);
     }
@@ -36,12 +34,12 @@ public class ProfesorDAOImpl implements ProfesorDAO {
 
     @Override
     public void update(Profesor profesor) {
-        String sql = "UPDATE Profesor SET nombre = ?, correo_institucional = ? WHERE id_profesor = ?";
-        jdbcTemplate.update(sql, profesor.getNombre(),  profesor.getCorreo_institucional(), profesor.getId_profesor());
+        String sql = "UPDATE Profesor SET nombre = ?, correo = ? WHERE id_profesor = ?";
+        jdbcTemplate.update(sql, profesor.getNombre(), profesor.getCorreo(), profesor.getId_profesor());
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(int id) {
         String sql = "DELETE FROM Profesor WHERE id_profesor = ?";
         jdbcTemplate.update(sql, id);
     }
@@ -50,10 +48,10 @@ public class ProfesorDAOImpl implements ProfesorDAO {
         @Override
         public Profesor mapRow(ResultSet rs, int rowNum) throws SQLException {
             Profesor p = new Profesor();
-                p.setId_profesor(rs.getInt("id_profesor"));
-                p.setNombre(rs.getString("nombre"));
-                p.setCorreo_institucional(rs.getString("correo_institucional"));
-                return p;
+            p.setId_profesor(rs.getInt("id_profesor"));
+            p.setNombre(rs.getString("nombre"));
+            p.setCorreo(rs.getString("correo"));
+            return p;
         }
     }
 }

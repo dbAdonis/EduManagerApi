@@ -27,6 +27,11 @@ public class ProfesorRestController {
         return profesorService.add(profesor);
     }
 
+    @GetMapping("/{id}")
+    public Profesor obtenerPorId(@PathVariable int id) {
+        return profesorService.consultar(id);
+    }
+
     @PutMapping("/{id}")
     public Profesor actualizar(@PathVariable int id, @RequestBody Profesor profesor) {
         profesor.setId_profesor(id);
@@ -34,7 +39,7 @@ public class ProfesorRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable int id) {
         profesorService.eliminar(id);
     }
 }

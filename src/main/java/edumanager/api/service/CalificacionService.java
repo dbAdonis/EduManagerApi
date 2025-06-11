@@ -29,11 +29,11 @@ public class CalificacionService {
         return calificacionDAO.findAll();
     }
 
-    public Calificacion consultar(String id) {
+    public Calificacion consultar(int id) {
         return calificacionDAO.findById(id);
     }
 
-    public void eliminar(String id) {
+    public void eliminar(int id) {
         calificacionDAO.delete(id);
     }
 

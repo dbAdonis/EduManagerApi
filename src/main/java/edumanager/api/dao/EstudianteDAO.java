@@ -1,12 +1,12 @@
 package edumanager.api.dao;
 
-import edumanager.api.model.Estudiante;
 import java.util.List;
+import edumanager.api.model.Estudiante;
 
 public interface EstudianteDAO {
     void save(Estudiante estudiante);
-    Estudiante findById(String id);
+    Estudiante findById(int id);
     List<Estudiante> findAll();
     void update(Estudiante estudiante);
-    void delete(String id);
+    void delete(int id);
 }

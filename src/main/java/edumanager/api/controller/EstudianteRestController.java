@@ -27,6 +27,11 @@ public class EstudianteRestController {
         return estudianteService.add(estudiante);
     }
 
+    @GetMapping("/{id}")
+    public Estudiante obtenerPorId(@PathVariable int id) {
+        return estudianteService.consultar(id);
+    }
+
     @PutMapping("/{id}")
     public Estudiante actualizar(@PathVariable int id, @RequestBody Estudiante estudiante) {
         estudiante.setId_estudiante(id);
@@ -34,7 +39,7 @@ public class EstudianteRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable int id) {
         estudianteService.eliminar(id);
     }
 }

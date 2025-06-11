@@ -29,11 +29,11 @@ public class EstudianteService {
         return estudianteDAO.findAll();
     }
 
-    public Estudiante consultar(String id) {
+    public Estudiante consultar(int id) {
         return estudianteDAO.findById(id);
     }
 
-    public void eliminar(String id) {
+    public void eliminar(int id) {
         estudianteDAO.delete(id);
     }
 

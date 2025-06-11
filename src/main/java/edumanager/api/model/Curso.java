@@ -1,28 +1,21 @@
 package edumanager.api.model;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "curso")
 public class Curso {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id_curso;
-
     private String nombre;
-
-    @Column(unique = true)
-    private String codigo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_profesor", nullable = false)
+    private int cupo;
+    private int cupo_disponible;
     private Profesor profesor;
 
-    public Curso() {}
+    public Curso() {
+    }
 
-    public Curso(String nombre, String codigo, Profesor profesor) {
+    public Curso(int id_curso, String nombre, int cupo, int cupo_disponible, Profesor profesor) {
+        this.id_curso = id_curso;
         this.nombre = nombre;
-        this.codigo = codigo;
+        this.cupo = cupo;
+        this.cupo_disponible = cupo_disponible;
         this.profesor = profesor;
     }
 
@@ -42,12 +35,20 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public int getCupo() {
+        return cupo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCupo(int cupo) {
+        this.cupo = cupo;
+    }
+
+    public int getCupo_disponible() {
+        return cupo_disponible;
+    }
+
+    public void setCupo_disponible(int cupo_disponible) {
+        this.cupo_disponible = cupo_disponible;
     }
 
     public Profesor getProfesor() {
@@ -57,4 +58,5 @@ public class Curso {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+
 }

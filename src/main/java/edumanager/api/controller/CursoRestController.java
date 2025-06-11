@@ -27,6 +27,11 @@ public class CursoRestController {
         return cursoService.add(curso);
     }
 
+    @GetMapping("/{id}")
+    public Curso obtenerPorId(@PathVariable int id) {
+        return cursoService.consultar(id);
+    }
+
     @PutMapping("/{id}")
     public Curso actualizar(@PathVariable int id, @RequestBody Curso curso) {
         curso.setId_curso(id);  // Asumo que Curso tiene método setId(String id)
@@ -34,7 +39,7 @@ public class CursoRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable int id) {
         cursoService.eliminar(id);
     }
 }

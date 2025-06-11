@@ -31,11 +31,11 @@ public class MatriculaService {
         return matriculaDAO.findAll();
     }
 
-    public Matricula consultar(String id){
+    public Matricula consultar(int id){
         return matriculaDAO.findById(id);
     }
 
-    public void eliminar(String id){
+    public void eliminar(int id){
         matriculaDAO.delete(id);
     }
 

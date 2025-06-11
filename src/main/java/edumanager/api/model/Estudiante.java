@@ -1,34 +1,20 @@
 package edumanager.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "estudiante")
 public class Estudiante {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id_estudiante;
-
     private String nombre;
-
-    @Column(unique = true)
     private String correo;
-
-    @Column(unique = true)
-    private String carnet;
+    private String estado;
 
     public Estudiante() {
     }
 
-    public Estudiante(String nombre, String correo, String carnet) {
+    public Estudiante(int id_estudiante, String nombre, String correo, String estado) {
+        this.id_estudiante = id_estudiante;
         this.nombre = nombre;
         this.correo = correo;
-        this.carnet = carnet;
+        this.estado = estado;
     }
 
     public int getId_estudiante() {
@@ -55,12 +41,12 @@ public class Estudiante {
         this.correo = correo;
     }
 
-    public String getCarnet() {
-        return carnet;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCarnet(String carnet) {
-        this.carnet = carnet;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

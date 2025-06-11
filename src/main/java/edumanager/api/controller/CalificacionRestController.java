@@ -27,6 +27,11 @@ public class CalificacionRestController {
         return calificacionService.add(calificacion);
     }
 
+    @GetMapping("/{id}")
+    public Calificacion obtenerPorId(@PathVariable int id) {
+        return calificacionService.consultar(id);
+    }
+
     @PutMapping("/{id}")
     public Calificacion actualizar(@PathVariable int id, @RequestBody Calificacion calificacion) {
         calificacion.setId_calificacion(id);
@@ -34,7 +39,7 @@ public class CalificacionRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable int id) {
         calificacionService.eliminar(id);
     }
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface MatriculaDAO {
     void save(Matricula matricula);
-    Matricula findById(String id);
+    Matricula findById(int id);
     List<Matricula> findAll();
     void update(Matricula matricula);
-    void delete(String id);
+    void delete(int id);
 }

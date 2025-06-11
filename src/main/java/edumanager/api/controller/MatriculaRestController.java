@@ -27,14 +27,19 @@ public class MatriculaRestController {
         return matriculaService.add(matricula);
     }
 
+    @GetMapping("/{id}")
+    public Matricula obtenerPorId(@PathVariable int id) {
+        return matriculaService.consultar(id);
+    }
+
     @PutMapping("/{id}")
     public Matricula actualizar(@PathVariable int id, @RequestBody Matricula matricula) {
-        matricula.setId_matricula(id);  // Asegúrate que Matricula tiene setId(String id)
+        matricula.setId_matricula(id);
         return matriculaService.actualizar(matricula);
     }
 
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable String id) {
+    public void eliminar(@PathVariable int id) {
         matriculaService.eliminar(id);
     }
 }

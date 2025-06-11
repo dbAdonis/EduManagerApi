@@ -1,0 +1,152 @@
+### Obtener todos los estudiantes
+GET http://localhost:8080/api/estudiantes
+
+### Agregar estudiante
+POST http://localhost:8080/api/estudiantes
+Content-Type: application/json
+
+{
+  "nombre": "Carlos Ruiz",
+  "correo": "carlos@example.com",
+  "estado": "activo"
+}
+
+### Actualizar estudiante
+PUT http://localhost:8080/api/estudiantes/1
+Content-Type: application/json
+
+{
+  "nombre": "Carlos Ruiz Actualizado",
+  "correo": "nuevo@example.com",
+  "estado": "inactivo"
+}
+
+### Eliminar estudiante
+DELETE http://localhost:8080/api/estudiantes/1
+
+
+### Obtener todos los profesores
+GET http://localhost:8080/api/profesores
+
+### Agregar profesor
+POST http://localhost:8080/api/profesores
+Content-Type: application/json
+
+{
+  "nombre": "Ana López",
+  "correo": "ana@example.com"
+}
+
+
+### Obtener todos los cursos
+GET http://localhost:8080/api/cursos
+
+### Agregar curso
+POST http://localhost:8080/api/cursos
+Content-Type: application/json
+
+{
+  "nombre": "Matemática I",
+  "cupo": 30,
+  "cupo_disponible": 30,
+  "profesor": {
+    "id_profesor": 1
+  }
+}
+
+
+### Obtener todas las matrículas
+GET http://localhost:8080/api/matriculas
+
+### Agregar matrícula
+POST http://localhost:8080/api/matriculas
+Content-Type: application/json
+
+{
+  "estudiante": {
+    "id_estudiante": 1
+  },
+  "curso": {
+    "id_curso": 1
+  },
+  "fecha_matricula": "2025-06-01",
+  "estado": "activa"
+}
+
+
+### Obtener todas las calificaciones
+GET http://localhost:8080/api/calificaciones
+
+### Agregar calificación
+POST http://localhost:8080/api/calificaciones
+Content-Type: application/json
+
+{
+  "matricula": {
+    "id_matricula": 2
+  },
+  "nota": 85.5,
+  "fecha_calificacion": "2025-06-10"
+}
+
+
+### Obtener todos los tipos de evaluación
+GET http://localhost:8080/api/tipos-evaluacion
+
+### Agregar tipo de evaluación
+POST http://localhost:8080/api/tipos-evaluacion
+Content-Type: application/json
+
+{
+  "nombre": "Proyecto"
+}
+
+### Actualizar tipo de evaluación
+PUT http://localhost:8080/api/tipos-evaluacion/6
+Content-Type: application/json
+
+{
+  "nombre": "Proyecto Final"
+}
+
+### Eliminar tipo de evaluación
+DELETE http://localhost:8080/api/tipos-evaluacion/6
+
+
+### Obtener todas las evaluaciones
+GET http://localhost:8080/api/evaluaciones
+
+### Agregar evaluación
+POST http://localhost:8080/api/evaluaciones
+Content-Type: application/json
+
+{
+  "matricula": {
+    "id_matricula": 2
+  },
+  "tipoEvaluacion": {
+    "id_tipo": 2
+  },
+  "descripcion": "Quiz 1",
+  "nota": 90.0,
+  "porcentaje": 20.0
+}
+
+### Actualizar evaluación
+PUT http://localhost:8080/api/evaluaciones/1
+Content-Type: application/json
+
+{
+  "matricula": {
+    "id_matricula": 2
+  },
+  "tipoEvaluacion": {
+    "id_tipo": 2
+  },
+  "descripcion": "Quiz 1 Modificado",
+  "nota": 92.5,
+  "porcentaje": 20.0
+}
+
+### Eliminar evaluación
+DELETE http://localhost:8080/api/evaluaciones/1
