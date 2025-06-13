@@ -16,8 +16,12 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
     @Override
     public void save(Estudiante estudiante) {
-        String sql = "INSERT INTO Estudiante (nombre, correo, estado) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, estudiante.getNombre(), estudiante.getCorreo(), estudiante.getEstado());
+        jdbcTemplate.update(
+            "EXEC InsertarEstudiante @nombre = ?, @correo = ?, @estado = ?",
+            estudiante.getNombre(),
+            estudiante.getCorreo(),
+            estudiante.getEstado()
+        );
     }
 
     @Override
@@ -34,14 +38,17 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 
     @Override
     public void update(Estudiante estudiante) {
-        String sql = "UPDATE Estudiante SET nombre = ?, correo = ?, estado = ? WHERE id_estudiante = ?";
-        jdbcTemplate.update(sql, estudiante.getNombre(), estudiante.getCorreo(), estudiante.getEstado(), estudiante.getId_estudiante());
+        jdbcTemplate.update(
+            "EXEC ActualizarEstudiante @id_estudiante = ?, @nombre = ?, @correo = ?, @estado = ?",
+            estudiante.getId_estudiante(),
+            estudiante.getNombre(),
+            estudiante.getCorreo(),
+            estudiante.getEstado());
     }
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM Estudiante WHERE id_estudiante = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update("EXEC EliminarEstudiante @id_estudiante = ?", id);
     }
 
     private static class EstudianteRowMapper implements RowMapper<Estudiante> {

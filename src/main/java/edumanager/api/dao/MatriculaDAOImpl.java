@@ -23,8 +23,10 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public void save(Matricula m) {
-        String sql = "INSERT INTO Matricula (id_estudiante, id_curso, fecha_matricula, estado) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, m.getEstudiante().getId_estudiante(), m.getCurso().getId_curso(), m.getFecha_matricula(), m.getEstado());
+        jdbcTemplate.update("EXEC InsertarMatricula @id_estudiante = ?, @id_curso = ?, @fecha_matricula = ?",
+        m.getEstudiante().getId_estudiante(), 
+        m.getCurso().getId_curso(), 
+        m.getFecha_matricula());
     }
 
     @Override
@@ -62,14 +64,17 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public void update(Matricula m) {
-        String sql = "UPDATE Matricula SET id_estudiante = ?, id_curso = ?, fecha_matricula = ?, estado = ? WHERE id_matricula = ?";
-        jdbcTemplate.update(sql, m.getEstudiante().getId_estudiante(), m.getCurso().getId_curso(), m.getFecha_matricula(), m.getEstado(), m.getId_matricula());
+        jdbcTemplate.update("EXEC ActualizarMatricula @id_matricula = ?, @id_estudiante = ?, @id_curso = ?, @fecha_matricula = ?, @estado = ?", 
+        m.getId_matricula(),
+        m.getEstudiante().getId_estudiante(), 
+        m.getCurso().getId_curso(), 
+        m.getFecha_matricula(), 
+        m.getEstado());
     }
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM Matricula WHERE id_matricula = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update("EXEC EliminarMatricula @id_matricula = ?", id);
     }
 
     private static class MatriculaRowMapper implements RowMapper<Matricula> {
@@ -103,5 +108,10 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
             return m;
         }
+    }
+
+    @Override
+    public void cancelarMatricula(int id) {
+       jdbcTemplate.update("EXEC CancelarMatricula @id_matricula = ?", id);
     }
 }

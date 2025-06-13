@@ -19,8 +19,10 @@ public class CursoDAOImpl implements CursoDAO {
 
     @Override
     public void save(Curso curso) {
-        String sql = "INSERT INTO Curso (nombre, cupo, cupo_disponible, id_profesor) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, curso.getNombre(), curso.getCupo(), curso.getCupo_disponible(), curso.getProfesor().getId_profesor());
+        jdbcTemplate.update("EXEC InsertarCurso @nombre = ?, @cupo = ?, @id_profesor = ?",
+        curso.getNombre(),
+        curso.getCupo(),
+        curso.getProfesor().getId_profesor());
     }
 
     @Override
@@ -60,14 +62,16 @@ public class CursoDAOImpl implements CursoDAO {
 
     @Override
     public void update(Curso curso) {
-        String sql = "UPDATE Curso SET nombre = ?, cupo = ?, cupo_disponible = ?, id_profesor = ? WHERE id_curso = ?";
-        jdbcTemplate.update(sql, curso.getNombre(), curso.getCupo(), curso.getCupo_disponible(), curso.getProfesor().getId_profesor(), curso.getId_curso());
+        jdbcTemplate.update("EXEC ActualizarCurso @id_curso = ?, @nombre = ?, @cupo = ?, @id_profesor = ?",
+        curso.getId_curso(),
+        curso.getNombre(),
+        curso.getCupo(),
+        curso.getProfesor().getId_profesor());
     }
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM Curso WHERE id_curso = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update("EXEC EliminarCurso @id_curso = ?", id);
     }
 
     private static class CursoRowMapper implements RowMapper<Curso> {

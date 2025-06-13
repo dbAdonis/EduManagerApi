@@ -9,4 +9,5 @@ public interface MatriculaDAO {
     List<Matricula> findAll();
     void update(Matricula matricula);
     void delete(int id);
+    void cancelarMatricula(int id);
 }

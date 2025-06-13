@@ -39,4 +39,8 @@ public class MatriculaService {
         matriculaDAO.delete(id);
     }
 
+    public void cancelarMatricula(int idMatricula) {
+        matriculaDAO.cancelarMatricula(idMatricula);
+    }
+
 }

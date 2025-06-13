@@ -2,6 +2,8 @@ package edumanager.api.controller;
 
 import edumanager.api.model.Matricula;
 import edumanager.api.service.MatriculaService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +43,11 @@ public class MatriculaRestController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable int id) {
         matriculaService.eliminar(id);
+    }
+
+    @PutMapping("/{id}/cancelar")
+    public ResponseEntity<String> cancelarMatricula(@PathVariable int id) {
+        matriculaService.cancelarMatricula(id);
+        return ResponseEntity.ok("Matrícula cancelada correctamente.");
     }
 }

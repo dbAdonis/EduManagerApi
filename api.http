@@ -150,3 +150,6 @@ Content-Type: application/json
 
 ### Eliminar evaluación
 DELETE http://localhost:8080/api/evaluaciones/1
+
+###
+PUT http://localhost:8080/api/matriculas/23/cancelar
