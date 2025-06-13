@@ -1,51 +1,53 @@
 package edumanager.api.model;
 
 public class Usuario {
-    private int id;
-    private String nombreUsuario;
-    private String contrasena;
-    private String nombreCompleto;
+    private int id_usuario;
+    private String username;
+    private String password;
+    private String role;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombreUsuario, String contrasena, String nombreCompleto) {
-        this.id = id;
-        this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.nombreCompleto = nombreCompleto;
+    public Usuario(int id_usuario, String username, String password, String role) {
+        this.id_usuario = id_usuario;
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
-    public int getId() {
-        return id;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getRole() {
+        return role;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setRole(String role) {
+        this.role = role;
     }
+
+    
 
 }
